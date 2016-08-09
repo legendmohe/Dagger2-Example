@@ -27,8 +27,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.legendmohe.dagger2.di.component.DaggerUserComponent;
+import com.example.legendmohe.dagger2.di.module.UserModule;
+import com.example.legendmohe.dagger2.model.UserModel;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -59,6 +65,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+
+    @Inject
+    UserModule mUserModule;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -294,12 +303,16 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      */
     public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 
+        @Inject
+        UserModel mUserModel;
+
         private final String mEmail;
         private final String mPassword;
 
         UserLoginTask(String email, String password) {
             mEmail = email;
             mPassword = password;
+            mUserModel = DaggerUserComponent.builder().userModule(new UserModule()).build().getUserModel();
         }
 
         @Override
