@@ -1,5 +1,6 @@
 package com.example.legendmohe.dagger2.di.module;
 
+import android.app.Application;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
@@ -16,16 +17,15 @@ import dagger.Provides;
  */
 @Module
 public class ApplicationModule {
-    private final MyApplication mApplication;
+    private final Application mApplication;
 
-    @Inject
-    public ApplicationModule(MyApplication application) {
+    public ApplicationModule(Application application) {
         this.mApplication = application;
     }
 
     @Provides
     @Singleton
-    MyApplication provideApplication() {
+    Application provideApplication() {
         return this.mApplication;
     }
 
@@ -33,7 +33,7 @@ public class ApplicationModule {
     @Provides
     @Singleton
     // Application reference must come from AppModule.class
-    SharedPreferences providesSharedPreferences(MyApplication application) {
+    SharedPreferences providesSharedPreferences(Application application) {
         return PreferenceManager.getDefaultSharedPreferences(application);
     }
 }
