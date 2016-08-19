@@ -2,15 +2,12 @@ package com.example.legendmohe.dagger2.base;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
-import android.test.mock.MockApplication;
 
 import com.example.legendmohe.dagger2.MyApplication;
-import com.example.legendmohe.dagger2.di.component.ActivityComponent;
 import com.example.legendmohe.dagger2.di.component.ApplicationComponent;
-import com.example.legendmohe.dagger2.di.component.DaggerActivityComponent;
-import com.example.legendmohe.dagger2.di.module.ActivityModule;
+import com.example.legendmohe.dagger2.di.component.DaggerBaseActivityComponent;
+import com.example.legendmohe.dagger2.di.module.BaseActivityModule;
 import com.example.legendmohe.dagger2.di.module.TestObject;
 
 import javax.inject.Inject;
@@ -19,7 +16,14 @@ import javax.inject.Inject;
  * Created by legendmohe on 16/8/11.
  */
 public class BaseActivity extends AppCompatActivity {
+    @Inject
+    TestObject mTestObject1;
 
+    @Inject
+    TestObject mTestObject2;
+
+    @Inject
+    protected SharedPreferences mSharedPreferences;
 
     protected ApplicationComponent mApplicationComponent;
 
@@ -28,14 +32,9 @@ public class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mApplicationComponent = ((MyApplication) getApplication()).getApplicationComponent();
 //        mApplicationComponent.injectCommon(this);
-//        DaggerActivityComponent.builder()
-//                .activityModule(new ActivityModule(this))
-//                .applicationComponent(mApplicationComponent)
-//                .build();
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
+        DaggerBaseActivityComponent.builder()
+                .baseActivityModule(new BaseActivityModule(this))
+                .applicationComponent(mApplicationComponent)
+                .build().inject(this);
     }
 }

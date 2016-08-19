@@ -4,9 +4,6 @@ import android.app.Activity;
 
 import com.example.legendmohe.dagger2.base.PerActivity;
 
-import javax.inject.Named;
-import javax.inject.Singleton;
-
 import dagger.Module;
 import dagger.Provides;
 
@@ -14,10 +11,10 @@ import dagger.Provides;
  * Created by legendmohe on 16/8/11.
  */
 @Module
-public class ActivityModule {
+public class BaseActivityModule {
     private final Activity activity;
 
-    public ActivityModule(Activity activity) {
+    public BaseActivityModule(Activity activity) {
         this.activity = activity;
     }
 

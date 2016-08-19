@@ -1,11 +1,8 @@
 package com.example.legendmohe.dagger2.di.component;
 
 import android.app.Application;
-import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
+import android.content.SharedPreferences;
 
-import com.example.legendmohe.dagger2.MyApplication;
-import com.example.legendmohe.dagger2.base.BaseActivity;
 import com.example.legendmohe.dagger2.di.module.ApplicationModule;
 
 import javax.inject.Singleton;
@@ -20,7 +17,5 @@ import dagger.Component;
 public interface ApplicationComponent {
     Application application();
 
-    void inject(Application app);
-
-    void injectCommon(BaseActivity activity);
+    SharedPreferences sharePreferences();
 }

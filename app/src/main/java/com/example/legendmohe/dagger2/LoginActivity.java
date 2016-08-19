@@ -18,15 +18,16 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.legendmohe.dagger2.base.BaseActivity;
-import com.example.legendmohe.dagger2.di.component.ActivityComponent;
-import com.example.legendmohe.dagger2.di.component.DaggerActivityComponent;
+import com.example.legendmohe.dagger2.di.component.ABCComponent;
+import com.example.legendmohe.dagger2.di.component.DaggerABCComponent;
 import com.example.legendmohe.dagger2.di.component.DaggerUserComponent;
-import com.example.legendmohe.dagger2.di.module.ActivityModule;
+import com.example.legendmohe.dagger2.di.module.ABCModule;
 import com.example.legendmohe.dagger2.di.module.TestObject;
 import com.example.legendmohe.dagger2.di.module.UserModule;
+import com.example.legendmohe.dagger2.model.A;
+import com.example.legendmohe.dagger2.model.B;
+import com.example.legendmohe.dagger2.model.C;
 import com.example.legendmohe.dagger2.model.UserModel;
-
-import javax.inject.Inject;
 
 /**
  * A login screen that offers login via email/password.
@@ -57,16 +58,16 @@ public class LoginActivity extends BaseActivity {
     private View mProgressView;
     private View mLoginFormView;
 
-    @Inject
+    //    @Inject
     TestObject mTestObject1;
 
-    @Inject
+    //    @Inject
     TestObject mTestObject2;
 
-    @Inject
+    //    @Inject
     protected SharedPreferences mSharedPreferences;
 
-    private ActivityComponent mActivityComponent;
+//    private BaseActivityComponent mActivityComponent;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -98,13 +99,18 @@ public class LoginActivity extends BaseActivity {
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
 
-        mActivityComponent = DaggerActivityComponent.builder()
-                .activityModule(new ActivityModule(this))
-                .applicationComponent(((MyApplication) getApplication()).getApplicationComponent())
-                .build();
-        mActivityComponent.injectActivity(this);
+//        mActivityComponent = DaggerBaseActivityComponent.builder()
+//                .baseActivityModule(new BaseActivityModule(this))
+//                .applicationComponent(((MyApplication) getApplication()).getApplicationComponent())
+//                .build();
+//        mActivityComponent.inject(this);
 
         mEmailView.setText(mSharedPreferences.getString(CONSTANT_ACCOUNT, ""));
+
+        ABCComponent abcComponent = DaggerABCComponent.builder().aBCModule(new ABCModule()).build();
+        A a = abcComponent.provideA();
+        B b = abcComponent.provideB();
+        C c = abcComponent.provideC();
     }
 
     /**
@@ -209,7 +215,7 @@ public class LoginActivity extends BaseActivity {
      */
     public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 
-        @Inject
+        //        @Inject
         UserModel mUserModel;
 
         private final String mEmail;
