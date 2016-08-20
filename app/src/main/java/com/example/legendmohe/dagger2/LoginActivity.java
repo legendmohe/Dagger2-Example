@@ -18,14 +18,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.legendmohe.dagger2.base.BaseActivity;
-import com.example.legendmohe.dagger2.di.component.ABCComponent;
-import com.example.legendmohe.dagger2.di.component.DaggerABCComponent;
 import com.example.legendmohe.dagger2.di.component.DaggerUserComponent;
 import com.example.legendmohe.dagger2.di.module.TestObject;
 import com.example.legendmohe.dagger2.di.module.UserModule;
-import com.example.legendmohe.dagger2.model.A;
-import com.example.legendmohe.dagger2.model.B;
-import com.example.legendmohe.dagger2.model.C;
 import com.example.legendmohe.dagger2.model.UserModel;
 
 /**
@@ -105,11 +100,6 @@ public class LoginActivity extends BaseActivity {
 //        mActivityComponent.inject(this);
 
         mEmailView.setText(mSharedPreferences.getString(CONSTANT_ACCOUNT, ""));
-
-        ABCComponent abcComponent = DaggerABCComponent.builder().build();
-        A a = abcComponent.provideA();
-        B b = abcComponent.provideB();
-        C c = abcComponent.provideC();
     }
 
     /**

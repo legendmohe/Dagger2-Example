@@ -2,11 +2,7 @@ package com.example.legendmohe.dagger2;
 
 import android.util.Log;
 
-import com.example.legendmohe.dagger2.di.component.ABCComponent;
-import com.example.legendmohe.dagger2.di.component.DaggerABCComponent;
-import com.example.legendmohe.dagger2.model.A;
-import com.example.legendmohe.dagger2.model.B;
-import com.example.legendmohe.dagger2.model.C;
+import com.example.legendmohe.dagger2.model.Main;
 
 import org.junit.Test;
 
@@ -18,10 +14,7 @@ public class ExampleUnitTest {
 
     @Test
     public void addition_isCorrect() throws Exception {
-        ABCComponent abcComponent = DaggerABCComponent.builder().build();
-        A a = abcComponent.provideA();
-        B b = abcComponent.provideB();
-        C c = abcComponent.provideC();
+        Main main = new Main();
         Log.d(TAG, "!!!");
     }
 }
