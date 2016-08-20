@@ -21,7 +21,6 @@ import com.example.legendmohe.dagger2.base.BaseActivity;
 import com.example.legendmohe.dagger2.di.component.ABCComponent;
 import com.example.legendmohe.dagger2.di.component.DaggerABCComponent;
 import com.example.legendmohe.dagger2.di.component.DaggerUserComponent;
-import com.example.legendmohe.dagger2.di.module.ABCModule;
 import com.example.legendmohe.dagger2.di.module.TestObject;
 import com.example.legendmohe.dagger2.di.module.UserModule;
 import com.example.legendmohe.dagger2.model.A;
@@ -107,7 +106,7 @@ public class LoginActivity extends BaseActivity {
 
         mEmailView.setText(mSharedPreferences.getString(CONSTANT_ACCOUNT, ""));
 
-        ABCComponent abcComponent = DaggerABCComponent.builder().aBCModule(new ABCModule()).build();
+        ABCComponent abcComponent = DaggerABCComponent.builder().build();
         A a = abcComponent.provideA();
         B b = abcComponent.provideB();
         C c = abcComponent.provideC();
